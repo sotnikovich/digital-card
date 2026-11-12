@@ -1,0 +1,5 @@
+generator client {
+  provider     = "prisma-client"          // Новый провайдер
+  output       = "../src/generated/prisma" // Обязательный путь
+  moduleFormat = "cjs"                    // Важно для NestJS
+}
