@@ -22,6 +22,10 @@ async function bootstrap() {
     }),
   );
 
-  await app.listen(3000);
+  // Читаем PORT из окружения, локально используем 3000 как fallback
+  const port = process.env.PORT || 3000;
+  // Обязательно привязываемся к 0.0.0.0
+  await app.listen(port, '0.0.0.0');
 }
+
 bootstrap();
