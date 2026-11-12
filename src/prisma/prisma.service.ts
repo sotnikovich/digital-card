@@ -3,12 +3,14 @@ import { Injectable, OnModuleInit } from '@nestjs/common';
 import { PrismaPg } from '@prisma/adapter-pg';
 import { PrismaClient } from '../generated/prisma/client';
 
-
 @Injectable()
 export class PrismaService extends PrismaClient implements OnModuleInit {
   constructor() {
-    const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL });
-    super({ adapter }); // Передаём адаптер в конструктор
+    const adapter = new PrismaPg({
+      connectionString: process.env.DATABASE_URL,
+      ssl: { rejectUnauthorized: false }, // включаем SSL, отключаем проверку сертификата
+    });
+    super({ adapter });
   }
 
   async onModuleInit() {
@@ -21,7 +23,8 @@ export class PrismaService extends PrismaClient implements OnModuleInit {
           name: 'Максим Сотников',
           description: 'Backend-разработчик',
           githubUrl: 'https://github.com/sotnikovich',
-          linkedinUrl: 'https://www.linkedin.com/in/%D0%BC%D0%B0%D0%BA%D1%81%D0%B8%D0%BC-%D1%81%D0%BE%D1%82%D0%BD%D0%B8%D0%BA%D0%BE%D0%B2-65245b235/',
+          linkedinUrl:
+            'https://www.linkedin.com/in/%D0%BC%D0%B0%D0%BA%D1%81%D0%B8%D0%BC-%D1%81%D0%BE%D1%82%D0%BD%D0%B8%D0%BA%D0%BE%D0%B2-65245b235/',
           skills: {
             create: [
               { name: 'TypeScript' },
